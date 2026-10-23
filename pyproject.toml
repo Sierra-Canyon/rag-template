@@ -1,0 +1,12 @@
+[project]
+name = "hse-rag"
+version = "0.1.0"
+description = "Honors Software Engineering 2026-27 — applied track workspace, P01 onward: retrieval over your corpus, then the grounded agent"
+requires-python = ">=3.12"
+dependencies = [
+    "numpy>=2.0",
+    "nltk>=3.9",
+]
+
+[tool.uv]
+package = false          # this is a workspace, not a library to install
