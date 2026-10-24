@@ -22,7 +22,7 @@ project template ships its own `setup.sh` for exactly that reason.
 
 That installs Python 3.12, NumPy and NLTK, installs the secret guard, and runs the
 environment check. The check has two lines the foundations repo did not have, `Go
-toolchain` and `Boot.dev CLI`, and both have to say `OK` before P01 is done: every
+toolchain` and `Boot.dev CLI`, and both have to show `[  ok  ]` before P01 is done: every
 Boot.dev lesson is submitted through that CLI. It ends by asking you to try committing a
 fake key and watch it get refused. Do that.
 
@@ -63,11 +63,11 @@ package you just watched install.
 | Path | What |
 |---|---|
 | `rag/corpus.py` | **P02.** Your corpus as passages. Set `MIN_CHARS` to the minimum you settled on in A06. |
-| `rag/preprocess.py` | **P02.** You type this one. The docstring states your order of operations. |
+| `rag/preprocess.py` | **P02.** The top half is shipped; you type `tokenize` and `preprocess`. The docstring states your order of operations. |
 | `rag/tfidf.py` | **P04.** The index. The line marked `# CHAPTER FORMULA` takes the formula the chapter gives you. |
 | `rag/` after that | One module per chapter: BM25, chunking, embeddings, hybrid search, reranking, the grounded answer. |
 | `evidence/P<nn>.md` | One file per assignment with a marked slot for every paste, prediction and reflection answer. `scripts/check_evidence.py P01` tells you which slots are still empty. |
-| `scratch/` | The chapter's formula copied character for character, your five sentences, your notes. Committed, not graded. |
+| `scratch/` | The chapter's formula copied character for character, your three sentences, your notes. Committed, not graded. |
 | `data/` | Your corpus. Git-ignored except `README.md` and `SOURCE.md`. |
 | `scripts/check_env.py` | The environment check. Re-run it whenever something breaks. |
 | `scripts/install_secret_guard.sh` | Pre-commit hook that refuses staged keys. |

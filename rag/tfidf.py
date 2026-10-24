@@ -43,10 +43,13 @@ if __name__ == "__main__":
     raw = TfidfIndex(passages, stopwords=frozenset())                         # the same index with no stopwords removed, so "the" is in it
 
     if len(sys.argv) > 2 and sys.argv[1] == "idf":                            # P04 Step 3: the df and idf of the words you predicted, e.g.  -m rag.tfidf idf ulysses the
-        from rag.preprocess import preprocess
+        from rag.preprocess import _stemmer
         for word in sys.argv[2:]:
-            term = preprocess(word, stopwords=frozenset())[0]                 # the index holds stems, so look the word up as its stem, stopwords kept
-            print(f"{word}: stem {term!r}  df {raw.df[term]}  idf {raw.idf(term):.4f}")
+            term = _stemmer.stem(word.lower().strip())                       # the index holds stems, so look the word up as its stem, stopwords kept
+            if raw.df[term] == 0:
+                print(f"{word}: stem {term!r}  df 0  not in any passage")
+            else:
+                print(f"{word}: stem {term!r}  df {raw.df[term]}  idf {raw.idf(term):.4f}")
         sys.exit()
     print("passages:", ix.N, " vocabulary:", len(ix.df))
     once = sum(1 for n in ix.df.values() if n == 1)
