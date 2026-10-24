@@ -41,10 +41,12 @@ echo "  pre-commit hook installed"
 
 # 3. tell them if it is already too late
 echo "  scanning existing history ..."
-if git grep -InE 'sk-or-v1-[A-Za-z0-9]{20,}|sk-svcacct-|sk-proj-[A-Za-z0-9_-]{20,}|sk-ant-|AIza[0-9A-Za-z_-]{35}' \
-     $(git rev-list --all 2>/dev/null | head -200) -- 2>/dev/null | head -5; then
+hits=$(git grep -InE 'sk-or-v1-[A-Za-z0-9]{20,}|sk-svcacct-|sk-proj-[A-Za-z0-9_-]{20,}|sk-ant-|AIza[0-9A-Za-z_-]{35}' \
+     $(git rev-list --all 2>/dev/null | head -200) -- . ':!scripts/install_secret_guard.sh' 2>/dev/null | head -5 || true)
+if [ -n "$hits" ]; then
+  echo "$hits"
   echo
-  echo "  ^ If anything printed above, a key is IN YOUR HISTORY."
+  echo "  ^ A key is IN YOUR HISTORY."
   echo "    Revoke that key immediately, then tell your instructor. Do not try to"
   echo "    rewrite history first — revoke first, clean up second."
 else
@@ -54,5 +56,4 @@ echo
 echo "  Done. Test it:  echo 'sk-or-v1-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' > leak.md"
 echo "                  git add leak.md && git commit -m test"
 echo "  It should refuse. Then: git reset && rm leak.md"
-echo "  Use .md, not .txt: .gitignore ignores *.txt, so a leak.txt never reaches the hook."
 echo

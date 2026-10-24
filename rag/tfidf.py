@@ -1,6 +1,7 @@
 # rag/tfidf.py  (P04)
 # Run from the repo root:  uv run python -m rag.tfidf             (the index, four facts about it, three passages' top terms)
 #                     or:  uv run python -m rag.tfidf stopwords   (P04 extension: your corpus's own stopwords, and what dropping them changes)
+#                     or:  uv run python -m rag.tfidf idf WORD1 WORD2   (P04 Step 3: the df and idf of the words you predicted)
 # The one line you edit is the one marked CHAPTER FORMULA: replace it with the idf formula Boot.dev chapter 2 gave you,
 # character for character. If the chapter's term frequency is a raw count rather than a count divided by length, change tf too.
 import math, sys
@@ -40,6 +41,13 @@ if __name__ == "__main__":
     passages = load_passages()
     ix = TfidfIndex(passages)
     raw = TfidfIndex(passages, stopwords=frozenset())                         # the same index with no stopwords removed, so "the" is in it
+
+    if len(sys.argv) > 2 and sys.argv[1] == "idf":                            # P04 Step 3: the df and idf of the words you predicted, e.g.  -m rag.tfidf idf ulysses the
+        from rag.preprocess import preprocess
+        for word in sys.argv[2:]:
+            term = preprocess(word, stopwords=frozenset())[0]                 # the index holds stems, so look the word up as its stem, stopwords kept
+            print(f"{word}: stem {term!r}  df {raw.df[term]}  idf {raw.idf(term):.4f}")
+        sys.exit()
     print("passages:", ix.N, " vocabulary:", len(ix.df))
     once = sum(1 for n in ix.df.values() if n == 1)
     print("terms in exactly one passage:", once, f"({once / len(ix.df):.0%})")
