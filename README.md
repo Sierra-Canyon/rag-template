@@ -40,7 +40,7 @@ from September to June.
 ## Boot.dev's own project lives outside this repo
 
 ```
-~/version_control/bootdev-rag/
+~/version_control/rag-search-engine/
 ```
 
 The course builds its project on its dataset in that folder, and the CLI grades it there.
@@ -65,7 +65,12 @@ package you just watched install.
 | `rag/corpus.py` | **P02.** Your corpus as passages. Set `MIN_CHARS` to the minimum you settled on in A06. |
 | `rag/preprocess.py` | **P02.** The top half is shipped; you type `tokenize` and `preprocess`. The docstring states your order of operations. |
 | `rag/tfidf.py` | **P04.** The index. The line marked `# CHAPTER FORMULA` takes the formula the chapter gives you. |
-| `rag/` after that | One module per chapter: BM25, chunking, embeddings, hybrid search, reranking, the grounded answer. |
+| `rag/keyword.py` | **P06.** tf-idf and BM25 over the passages, with the chapter's `K1` and `B`. |
+| `rag/scoreboard.py` | **P06.** Every method scored on your five queries in `rag/queries.json`; grows a column in P08 and moves to chunks in P11. |
+| `rag/semantic.py` | **P08.** The chapter's model over the passages, embedded once and saved under `data/` with a guard. |
+| `rag/chunking.py` | **P09.** Word chunks with character positions. Set `SIZE` and `OVERLAP` in the P09 extension. |
+| `rag/hybrid.py`, `rag/search.py` | **P11.** Reciprocal rank fusion, and the three searches over your chunks. |
+| `rag/` after that | One module per chapter: reranking, the grounded answer. |
 | `evidence/P<nn>.md` | One file per assignment with a marked slot for every paste, prediction and reflection answer. `scripts/check_evidence.py P01` tells you which slots are still empty. |
 | `scratch/` | The chapter's formula copied character for character, your three sentences, your notes. Committed, not graded. |
 | `data/` | Your corpus. Git-ignored except `README.md` and `SOURCE.md`. |
