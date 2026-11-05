@@ -29,7 +29,9 @@ def score(query, chunks):
     return [float(s) for s in model().predict(pairs)]
 
 # In: a query, how many results, the pool size.  Out: the top k chunks after reranking, each with "score" and "hybrid_rank" added.
-def rerank(query, k=5, pool=POOL):
+def rerank(query, k=5, pool=None):
+    if pool is None:                                               # read POOL at call time, so a changed constant takes effect
+        pool = POOL
     candidates = search.hybrid(query, pool)
     scores = score(query, candidates)
     ranked = []
@@ -39,7 +41,9 @@ def rerank(query, k=5, pool=POOL):
     return ranked[:k]
 
 # In: a query and how many results.  Out: the top k chunks ordered by the chapter's batch LLM prompt, one request.
-def rerank_llm(query, k=5, pool=POOL):
+def rerank_llm(query, k=5, pool=None):
+    if pool is None:
+        pool = POOL
     candidates = search.hybrid(query, pool)
     listing = "\n".join(f"{i}. {c['text'][:300]}" for i, c in enumerate(candidates, start=1))
     prompt = f"""Rank the passages listed below by relevance to the following search query.
