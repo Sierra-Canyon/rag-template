@@ -70,7 +70,13 @@ package you just watched install.
 | `rag/semantic.py` | **P08.** The chapter's model over the passages, embedded once and saved under `data/` with a guard. |
 | `rag/chunking.py` | **P09.** Word chunks with character positions. Set `SIZE` and `OVERLAP` in the P09 extension. |
 | `rag/hybrid.py`, `rag/search.py` | **P11.** Reciprocal rank fusion, and the three searches over your chunks. |
-| `rag/` after that | One module per chapter: reranking, the grounded answer. |
+| `rag/llm.py` | **P12.** The one function that calls the model, with a cache under `data/` and a request counter. The key lives in `.env`, never in code. |
+| `rag/enhance.py`, `rag/enhance_check.py` | **P12, P13.** Chapter 7's spell, rewrite and expand with the chapter's prompts; the checker measures each one against your answer chunks. |
+| `rag/rerank.py` | **P14.** The cross-encoder over the hybrid top 20, and the chapter's batch LLM reranker. `MODEL` is chosen in P16. |
+| `rag/eval/` | **P15 to P21.** The finder, your golden set, its checker, the metrics, the runner, the LLM judge, the stage tracer and the grounded-agent eval. |
+| `rag/answer.py` | **P17, P18.** Chapter 10 on your chunks: `rag`, `summarize`, and `cite` with resolving citations and the refusal gate (`REFUSE_BELOW`). |
+| `rag/agent.py` | **P19, P20.** The milestone: one tool, `search_corpus`, and the same model without it as the baseline. |
+| `rag/ask.py` | **P22.** One command, the whole pipeline. |
 | `evidence/P<nn>.md` | One file per assignment with a marked slot for every paste, prediction and reflection answer. `scripts/check_evidence.py P01` tells you which slots are still empty. |
 | `scratch/` | The chapter's formula copied character for character, your three sentences, your notes. Committed, not graded. |
 | `data/` | Your corpus. Git-ignored except `README.md` and `SOURCE.md`. |
