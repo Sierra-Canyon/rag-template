@@ -3,7 +3,7 @@
 #                          uv run python -m rag.rerank --llm "<your query words>"      (the chapter's batch LLM reranker, one request)
 # Chapter 8's second stage: hybrid search pulls a pool of candidates fast, then a cross-encoder reads the query
 # and each candidate chunk together and gives the pair a score. The pool is sorted by that score and cut to k.
-# The cross-encoder is the chapter's model, running on your machine; a score can be negative, and only the order matters.
+# The cross-encoder is the chapter's model, running on your machine. A score can be negative, and only the order matters.
 import sys
 
 from sentence_transformers import CrossEncoder
@@ -12,7 +12,7 @@ from rag import search
 from rag.llm import chat, parse_json_list
 
 MODEL = "cross-encoder/ms-marco-TinyBERT-L2-v2"   # the chapter's cross-encoder
-POOL = 20                                          # how many hybrid results the reranker reads; the chapter uses 5 times the limit
+POOL = 20                                          # how many hybrid results the reranker reads. The chapter uses 5 times the limit
 
 _model = None
 

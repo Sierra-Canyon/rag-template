@@ -1,7 +1,7 @@
 # rag/eval/trace.py  (P21, and chapter 9's error analysis)
 # Run from the repo root:  uv run python -m rag.eval.trace              (every golden question the pipeline misses at k = 5)
 #                          uv run python -m rag.eval.trace g07 g13      (named questions, hit or miss)
-#                          uv run python -m rag.eval.trace --expand g07 (the same, with the query expanded first; one request per question)
+#                          uv run python -m rag.eval.trace --expand g07 (the same, with the query expanded first, one request per question)
 # Chapter 9 lesson 6, written down: for a question, the rank of its labeled chunk at every stage of the pipeline,
 # so a miss can be traced to the stage that lost it. A dash means the chunk was not in that stage's list at all.
 #   bm25 and semantic: rank in each engine's top 50 (the pool hybrid search fuses)

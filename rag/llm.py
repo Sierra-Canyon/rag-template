@@ -3,7 +3,7 @@
 # One place that talks to the model, so every later script calls the same function the same way.
 # Chapter 7's setup: the OpenAI library pointed at OpenRouter, the key read from .env, the model id "openrouter/free".
 # Two things the chapter does not have, both here because the free tier allows about 50 requests a day:
-#   a cache (data/llm_cache.json): the same prompt sent twice costs one request, and a rerun of any script is free;
+#   a cache (data/llm_cache.json): the same prompt sent twice costs one request, and a rerun of any script is free.
 #   a counter: every script prints how many requests it really made, so you know what a day's work costs.
 # chat(prompt) is what most scripts use. chat_messages(messages, tools) is the same thing for a whole conversation,
 # which the agent in P19 needs.
@@ -55,7 +55,7 @@ def fingerprint(model, messages, tools=None):
 
 # In: a whole conversation (a list of role/content dicts) and optional tool definitions.
 # Out: the assistant's message as a plain dict: {"content": str or None, "tool_calls": [...] or None}, plus token counts.
-# The reply comes from the cache when this exact request was sent before; otherwise one request goes out and the reply is saved.
+# The reply comes from the cache when this exact request was sent before. Otherwise one request goes out and the reply is saved.
 def chat_messages(messages, tools=None, model=MODEL, retries=3):
     global calls_made
     key = fingerprint(model, messages, tools)

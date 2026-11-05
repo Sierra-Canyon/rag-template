@@ -4,7 +4,7 @@
 # The milestone's eval: every question in rag/eval/grounded_questions.json through the agent twice, once with
 # the search tool and once without, and the two scored the same way:
 #   an in-corpus question is correct when the answer contains the labeled answer string, refused when the agent
-#   said it does not have enough information, wrong otherwise;
+#   said it does not have enough information, wrong otherwise.
 #   an out-of-corpus question (answer null) is correct when the agent refused, wrong when it answered anyway.
 # In tool mode the rows also say whether the agent cited one of the labeled chunks. Writes rag/eval/grounded_results.json.
 import json
@@ -28,7 +28,7 @@ def grade(q, answer):
         return "refused"
     return "correct" if norm(q["answer"]) in norm(answer) else "wrong"
 
-# In: a mode.  Out: the list of per-question rows; prints them.
+# In: a mode.  Out: the list of per-question rows. Prints them.
 def evaluate(mode):
     questions = json.loads(QUESTIONS.read_text(encoding="utf-8"))
     rows = []

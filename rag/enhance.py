@@ -51,7 +51,7 @@ PROMPTS = {"spell": SPELL, "rewrite": REWRITE, "expand": EXPAND}
 # In: a method name and a query.  Out: the enhanced query (for expand, the original with the new terms appended).
 def enhance(method, query):
     prompt = PROMPTS[method].format(note=CORPUS_NOTE, query=query)
-    reply = chat(prompt).strip().strip('"')                    # models like to quote the answer; the quotes are not part of the query
+    reply = chat(prompt).strip().strip('"')                    # models like to quote the answer, and the quotes are not part of the query
     if method == "expand":
         return f"{query} {reply}"
     return reply

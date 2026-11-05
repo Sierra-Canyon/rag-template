@@ -2,7 +2,7 @@
 # Run from the repo root:  uv run python -m rag.enhance_check
 # Chapter 7's three enhancements, measured instead of eyeballed: for every query in rag/queries.json and
 # rag/questions.json, the hybrid rank of the answer chunk with the query as typed, rewritten, and expanded.
-# Two requests per query (rewrite and expand); spell is skipped because these queries have no typos.
+# Two requests per query (rewrite and expand). Spell is skipped because these queries have no typos.
 # "helped" means the rank got better (or appeared), "hurt" means it got worse (or vanished), "same" otherwise.
 import json
 

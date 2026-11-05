@@ -4,7 +4,7 @@
 #   precision@k = relevant retrieved / k           (how much of what you found is relevant)
 #   recall@k    = relevant retrieved / total relevant   (how much of what is relevant you found)
 #   f1          = 2 * p * r / (p + r), 0 when both are 0
-#   rr          = 1 / rank of the first relevant chunk, 0 if none is in the top k; the mean over questions is MRR
+#   rr          = 1 / rank of the first relevant chunk, 0 if none is in the top k. The mean over questions is MRR
 
 # In: a ranked list of chunk ids and the labeled ids, and k.  Out: a dict of the four numbers for this question.
 def score(ranked_ids, relevant, k=5):

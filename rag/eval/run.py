@@ -18,7 +18,7 @@ METHODS = {
     "rerank": rerank.rerank,
 }
 
-# In: k.  Out: a dict from method name to its list of per-question results; prints the table.
+# In: k.  Out: a dict from method name to its list of per-question results. Prints the table.
 def run(k=5):
     gold = load_golden()
     print(f"n = {len(gold)} questions; one question moves recall by {1 / len(gold):.3f}")

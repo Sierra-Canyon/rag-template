@@ -16,7 +16,7 @@ from rag.corpus import ROOT
 from rag.llm import chat
 
 CORPUS_NOTE = "Homer's Iliad and Odyssey in Samuel Butler's prose translation"   # what the corpus is, for the model
-REFUSE_BELOW = -100.0        # P18 Step 4 sets this from your own scores; -100 means the gate is off
+REFUSE_BELOW = -100.0        # P18 Step 4 sets this from your own scores. -100 means the gate is off
 LOG = ROOT / "data" / "answers.jsonl"
 
 RAG = """You are a RAG agent for a reading service that answers questions about {note}.
