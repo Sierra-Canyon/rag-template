@@ -86,7 +86,7 @@ package you just watched install.
 ## Rules that apply in every repo you open this year
 
 **Branches.** `dev/<feature>` for work. One pull request per assignment, **jd12** as the
-reviewer, and the PR body says where the work is weakest. Your student log is on the
+reviewer. Your student log is on the
 `<your-username>-track` branch from P01 to the end of the semester.
 
 **Type every Boot.dev solution yourself**, and type the corpus version yourself too. The
