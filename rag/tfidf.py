@@ -2,8 +2,8 @@
 # Run from the repo root:  uv run python -m rag.tfidf             (the index, four facts about it, three passages' top terms)
 #                     or:  uv run python -m rag.tfidf stopwords   (P04 extension: your corpus's own stopwords, and what dropping them changes)
 #                     or:  uv run python -m rag.tfidf idf WORD1 WORD2   (P04 Step 3: the df and idf of the words you predicted)
-# The one line you edit is the one marked CHAPTER FORMULA: replace it with the idf formula Boot.dev chapter 2 gave you,
-# character for character. If the chapter's term frequency is a raw count rather than a count divided by length, change tf too.
+# The line marked CHAPTER FORMULA is the idf formula from Boot.dev chapter 2: check it against scratch/p03-formula.md.
+# The one line you edit is the body of tf: the chapter's term frequency is the raw count, not the count divided by length.
 import math, sys
 from collections import Counter
 

@@ -1,13 +1,12 @@
-# rag/scoreboard.py  (P06, grows in P08, P11 and P14)
+# rag/scoreboard.py  (P06, grows in P08 and P11)
 # Run from the repo root:  uv run python -m rag.scoreboard
 # Scores every search method on the queries in rag/queries.json. A query is "found" when the passage that
 # answers it is in the method's top 5; the table shows the rank it got, or - for not in the top 5.
 # The needle is how the script knows which passage is right: a few words copied exactly from the answer passage.
 import json
 
-from rag import rerank, search
-from rag.chunking import OVERLAP, SIZE, load_chunks
-from rag.corpus import ROOT
+from rag.corpus import ROOT, load_passages
+from rag.keyword import Keyword
 
 QUERIES = json.loads((ROOT / "rag" / "queries.json").read_text(encoding="utf-8"))
 
@@ -24,14 +23,13 @@ def first_hit(results, needle):
 
 # In: nothing.  Out: a dict from method name to a function that takes a query and returns its top 5.
 def methods():
-    units = load_chunks(SIZE, OVERLAP)
-    for q in QUERIES:
-        assert any(norm(q["needle"]) in norm(u["text"]) for u in units), f"{q['id']}: needle not in any chunk"
+    units = load_passages()
+    for q in QUERIES:                               # every needle must be in some passage, or the query can never be found
+        assert any(norm(q["needle"]) in norm(u["text"]) for u in units), f"{q['id']}: needle not in any passage"
+    kw = Keyword(units)
     return {
-        "bm25": lambda q: search.keyword(q, 5),
-        "semantic": lambda q: search.semantic(q, 5),
-        "hybrid": lambda q: search.hybrid(q, 5),
-        "rerank": lambda q: rerank.rerank(q, 5),      # P14: the cross-encoder over the hybrid top 20
+        "tfidf": lambda q: kw.search(q, 5, method="tfidf"),
+        "bm25": lambda q: kw.search(q, 5),
     }
 
 if __name__ == "__main__":

@@ -1,6 +1,6 @@
 # rag/ask.py  (P22)
 # Run from the repo root:  uv run python -m rag.ask "<a question about your corpus>"
-# One command, the whole pipeline: hybrid search over the chunks, the cross-encoder on the top 20, the refusal
+# One command, the whole pipeline: hybrid search over the chunks, the cross-encoder on the hybrid pool (rerank.POOL), the refusal
 # gate, a cited answer, every citation checked. This is the command the README's front page tells a stranger to run.
 import sys
 

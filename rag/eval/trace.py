@@ -6,7 +6,7 @@
 # so a miss can be traced to the stage that lost it. A dash means the chunk was not in that stage's list at all.
 #   bm25 and semantic: rank in each engine's top 50 (the pool hybrid search fuses)
 #   hybrid: rank after fusion, in the top 50
-#   rerank pool: whether the chunk was among the 20 hybrid results the cross-encoder read
+#   rerank pool: whether the chunk was among the hybrid results the cross-encoder read (rerank.POOL of them)
 #   rerank: rank after the cross-encoder, in those 20
 import sys
 
