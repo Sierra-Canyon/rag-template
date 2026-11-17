@@ -1,0 +1,5 @@
+<paste: a sentence from data/corpus.txt with a name in it. Select and copy, never retype. Replace this whole line>
+
+<paste: a sentence with a number in it. Keep the blank line above and below>
+
+<paste: a sentence with punctuation the chapter's examples did not have>
